@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="manifest" href="./manifest/manifest.webmanifest">
+</head>
+<body>
+    <h1>Calculator</h1>
+<div>
+  <input type="number" id="num1">
+  <input type="number" id="num2">
+  <button onclick="calculate('add')">Add</button>
+  <button onclick="calculate('sub')">Subtract</button>
+  <button onclick="calculate('multi')">Multiply</button>
+</div>
+<div class="output">
+  <span id="result"></span>
+</div>
+
+<h1>Age Calculator</h1>
+<div>
+  <input type="text" id="name" placeholder="Enter your name">
+  <input type="number" id="birthYear" placeholder="Enter your birth year">
+  <button onclick="calculateAge()">Calculate Age</button>
+</div>
+<div class="output">
+  <span id="age"></span>
+</div>
+
+<script>
+  function calculate(operation) {
+    const num1 = Number(document.getElementById('num1').value);
+    const num2 = Number(document.getElementById('num2').value);
+    let result;
+    switch(operation) {
+      case 'add':
+        result = calculator.add(num1, num2);
+        break;
+      case 'sub':
+        result = calculator.sub(num1, num2);
+        break;
+      case 'multi':
+        result = calculator.multi(num1, num2);
+        break;
+    }
+    document.getElementById('result').innerHTML = result;
+  }
+
+  function calculateAge() {
+    const name = document.getElementById('name').value;
+    const birthYear = Number(document.getElementById('birthYear').value);
+    const ageResult = ageCalculator.calculateAge(name, birthYear);
+    if (ageResult.message) {
+      document.getElementById('age').innerHTML = ageResult.message;
+    } else {
+      document.getElementById('age').innerHTML = '<span class="error">' + ageResult + '</span>';
+    }
+  }
+</script>
+<script>
+     if("serviceWorker" in navigator){
+        window.addEventListener('load',()=>{
+          navigator.serviceWorker.register("sw.js").then(regiterObj=>{
+            console.log(regiterObj);
+          }).catch(err=>{
+            console.log(err);
+          })
+        })
+
+      }
+</script>
+</html>
+</body>
+</html>
